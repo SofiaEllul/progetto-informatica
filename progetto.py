@@ -6,11 +6,12 @@ pygame.init()
 Clock= pygame.time.Clock()
 
 cielo= pygame.image.load("immagini/cielo.png")
-cornice= pygame.image.load("immagini/cornice.png")
+cornice2= pygame.image.load("immagini/cornice2.png")
+cornicesu= pygame.transform.flip(cornice2, False, True)
 nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom.png")
 
-WINDOW_SIZE= (700,500)
+WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
@@ -21,7 +22,7 @@ while True:
             sys.exit()
 
     SCREEN.blit(cielo, (0,0))
-    SCREEN.blit(cornice, (0,0))
-
+    SCREEN.blit(cornice2, (0,348))
+    SCREEN.blit(cornicesu, (-2,0))
     pygame.display.update()
     Clock.tick(60)
