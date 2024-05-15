@@ -19,3 +19,9 @@ while True:
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
+
+    SCREEN.blit(cielo, (0,0))
+    SCREEN.blit(cornice, (0,0))
+
+    pygame.display.update()
+    Clock.tick(60)
