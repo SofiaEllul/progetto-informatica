@@ -41,13 +41,16 @@ def inizializza():
     nuvole=[]
     nuvole.append(nuvolette())
 
+def aggiorna():
+    pygame.display.update()
+    pygame.time.Clock().tick(FPS)
+
 while True:
     cornicesu
     for event in pygame.event.get():
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
-    
 
     SCREEN.blit(cielo, (0,0))
     SCREEN.blit(cornice2, (0,348))
