@@ -31,7 +31,7 @@ def immagini():
     SCREEN.blit(cielo, (0,0))
     for nuvola in nuvole:
         nuvola.movimento()
-    SCREEN.blit(cornice2, (cornicegiu_x, 348))
+    SCREEN.blit(cornice2, (cornicegiu_x, 245))
     SCREEN.blit(cornicesu, (cornicesu_x, 0))
     SCREEN.blit(tom, (tom_x, tom_y))
 
