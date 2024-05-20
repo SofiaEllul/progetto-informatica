@@ -20,9 +20,13 @@ while True:
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
+    
 
     SCREEN.blit(cielo, (0,0))
     SCREEN.blit(cornice2, (0,348))
     SCREEN.blit(cornicesu, (-2,0))
+    SCREEN.blit(tom, ())
     pygame.display.update()
     Clock.tick(60)
+
+from nuvole import nuvolette

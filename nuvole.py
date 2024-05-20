@@ -5,3 +5,4 @@ class nuvole:
     def movimento(self):
         self.x=vel
         SCREEN.blit(nuvoletta, (self.x,self.y+randint(10, ))
+        
