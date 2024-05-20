@@ -40,6 +40,9 @@ def inizializza():
     fast_tom=0
     nuvole=[]
     nuvole.append(nuvolette())
+def aggiorna():
+    pygame.display.update()
+    pygame.time.Clock().tick(FPS)
 
 def aggiorna():
     pygame.display.update()
