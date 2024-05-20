@@ -25,7 +25,7 @@ while True:
     SCREEN.blit(cielo, (0,0))
     SCREEN.blit(cornice2, (0,348))
     SCREEN.blit(cornicesu, (-2,0))
-    SCREEN.blit(tom, (0,0))
+    SCREEN.blit(tom, (-230, -30))
     pygame.display.update()
     Clock.tick(60)
 
