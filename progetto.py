@@ -27,6 +27,7 @@ class nuvolette:
         self.x=vel
         SCREEN.blit(nuvoletta, (self.x,self.y+randint))
 
+
 def immagine():
     SCREEN.blit(cielo, (0,0))
     for nuvola in nuvole:
@@ -41,13 +42,19 @@ def inizializza():
     nuvole=[]
     nuvole.append(nuvolette())
 
+inizializza()
+
+
 while True:
-    cornicesu
+    fast_tom+=1
+    tom_y+= fast_tom
     for event in pygame.event.get():
-        if event.type==QUIT:
+        if event.type==pygame.KEYDOWN and event.key==pygame.K_UP:
+            fast_tom=-10
+        if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
-    
+    aggiorna()
 
     SCREEN.blit(cielo, (0,0))
     SCREEN.blit(cornice2, (0,348))
