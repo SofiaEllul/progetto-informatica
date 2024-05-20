@@ -25,17 +25,22 @@ class nuvolette:
         self.y=randint(-75,150)
     def movimento(self):
         self.x=vel
-        SCREEN.blit(nuvoletta, (self.x,self.y+randint))
+        SCREEN.blit(nuvoletta, (self.x,self.y+randint(0,99)))
 
-def immagine():
+def immagini():
     SCREEN.blit(cielo, (0,0))
     for nuvola in nuvole:
         nuvola.movimento()
+    SCREEN.blit(cornice2, (cornicegiu_x, 348))
+    SCREEN.blit(cornicesu, (cornicesu_x, 0))
+    SCREEN.blit(tom, (tom_x, tom_y))
 
 def inizializza():
     global tom_x, tom_y, fast_tom
     global cornicesu_x, cornicegiu_x
     global nuvole
+    cornicegiu_x=0
+    cornicesu_x=-2
     tom_x, tom_y= -100, 150
     fast_tom=0
     nuvole=[]
@@ -45,20 +50,25 @@ def aggiorna():
     pygame.display.update()
     pygame.time.Clock().tick(FPS)
 
-def aggiorna():
-    pygame.display.update()
-    pygame.time.Clock().tick(FPS)
+inizializza()
 
 while True:
+    cornicegiu_x-=vel
+    if cornicegiu_x<-40:
+        cornicegiu_x=0
+
+    cornicesu_x-=vel
+    if cornicesu_x<-40:
+        cornicesu_x=0
+
+    fast_tom+=1
+    tom_y+=fast_tom
+
     for event in pygame.event.get():
+        if event.type==pygame.KEYDOWN and event.key==pygame.K_UP:
+            fast_tom=-10
         if event.type==QUIT:
             pygame.quit()
-            sys.exit()
 
-    SCREEN.blit(cielo, (0,0))
-    SCREEN.blit(cornice2, (0,348))
-    SCREEN.blit(cornicesu, (-2,0))
-    SCREEN.blit(tom, (-100, 150))
-    pygame.display.update()
-    Clock.tick(60)
-
+    immagini()
+    aggiorna()
