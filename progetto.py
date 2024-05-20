@@ -46,7 +46,6 @@ def aggiorna():
     pygame.time.Clock().tick(FPS)
 
 while True:
-    cornicesu
     for event in pygame.event.get():
         if event.type==QUIT:
             pygame.quit()
