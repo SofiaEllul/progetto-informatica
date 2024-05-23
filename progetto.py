@@ -66,13 +66,13 @@ def gameover():
 inizializza()
 
 while True:
-    cornicegiu_x-=vel
-    if cornicegiu_x<-300:
-        cornicegiu_x=0
+    # cornicegiu_x-=vel
+    # if cornicegiu_x<-300:
+    #     cornicegiu_x=0
 
-    cornicesu_x-=vel
-    if cornicesu_x<-300:
-        cornicesu_x=0
+    # cornicesu_x-=vel
+    # if cornicesu_x<-300:
+    #     cornicesu_x=0
 
     fast_tom+=1
     tom_y+=fast_tom
