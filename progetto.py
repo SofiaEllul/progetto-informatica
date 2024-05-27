@@ -1,9 +1,9 @@
 import pygame, sys
 from random import randint
 from pygame.locals import *
-
 from classe_nuvole import nuvolette
 from classe_moneta import monetine
+rect=pygame.rect
 
 pygame.init()
 Clock= pygame.time.Clock()
@@ -11,12 +11,14 @@ Clock= pygame.time.Clock()
 cielo= pygame.image.load("immagini/cielo.png")
 cornice2= pygame.image.load("immagini/cornice2.png")
 cornicesu= pygame.transform.flip(cornice2, False, True)
+nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom .png")
 game_over=pygame.image.load("immagini/gameover.png")
+monetina=pygame.image.load('immagini/monetina.png')
 
 FPS=50
-vel=6
-vel_nuvole=6
+vel=12
+vel_nuvole=12
 
 
 WINDOW_SIZE= (605,500)
@@ -27,6 +29,8 @@ def immagini():
     SCREEN.blit(cielo, (0,0))
     for nuvola in nuvole:
         nuvola.movimento()
+    for coin in moneta:
+        coin.movimento()
     SCREEN.blit(cornice2, (cornicegiu_x, 245))
     SCREEN.blit(cornicesu, (cornicesu_x, 0))
     SCREEN.blit(tom, (tom_x, tom_y))
@@ -44,6 +48,8 @@ def inizializza():
     moneta=[]
     moneta.append(monetine())
     
+# tom=rect
+# nuvola=rect
 
 def aggiorna():
     pygame.display.update()
@@ -76,16 +82,18 @@ while True:
     tom_y+=fast_tom
 
     for event in pygame.event.get():
-        if event.type==pygame.KEYDOWN and event.key==pygame.K_UP:
+        if event.type==KEYDOWN and event.key==K_UP:
             fast_tom=-10
         if event.type==QUIT:
             pygame.quit()
     
-    if nuvole[-1].x < 150:
+    if nuvole[-1].rect.x < 150:
         nuvole.append(nuvolette())
-
-    if moneta[-1].x < 150:
         moneta.append(monetine())
+        while moneta[-1].rect.top<nuvole[-1].rect.bottom and moneta[-1].rect.top>nuvole[-1].rect.top:
+            moneta.pop()
+            moneta.append(monetine())
+
     
     # for nuvola in nuvole:
     #     if nuvola.rect.collide_rect(tom.get_rect()):

@@ -10,7 +10,9 @@ SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 class nuvolette:
     def __init__(self):
         self.x=600
-        self.y=randint(-20,150)
+        self.y=randint(100,400)
+        self.image=nuvoletta
+        self.rect=self.image.get_rect(center=(self.x, self.y))
     def movimento(self):
-        self.x-=vel
-        SCREEN.blit(nuvoletta, (self.x,self.y+100))
+        self.rect.x-=vel
+        SCREEN.blit(self.image, self.rect)
