@@ -1,7 +1,9 @@
 import pygame, sys
 from random import randint
 from pygame.locals import *
-rect=pygame.rect
+
+from classe_nuvole import nuvolette
+from classe_moneta import monetine
 
 pygame.init()
 Clock= pygame.time.Clock()
@@ -9,35 +11,17 @@ Clock= pygame.time.Clock()
 cielo= pygame.image.load("immagini/cielo.png")
 cornice2= pygame.image.load("immagini/cornice2.png")
 cornicesu= pygame.transform.flip(cornice2, False, True)
-nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom .png")
 game_over=pygame.image.load("immagini/gameover.png")
-monetina=pygame.image.load('immagini/monetina.png')
 
 FPS=50
-vel=12
-vel_nuvole=12
+vel=6
+vel_nuvole=6
 
 
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
-
-class monetine:
-    def __init__(self):
-        self.x=400
-        self.y=randint(-10,150)
-    def movimento(self):
-        self.x-=vel
-        SCREEN.blit(monetina, (self.x,self.y+100))
-
-class nuvolette:
-    def __init__(self):
-        self.x=600
-        self.y=randint(-20,150)
-    def movimento(self):
-        self.x-=vel
-        SCREEN.blit(nuvoletta, (self.x,self.y+100))
 
 def immagini():
     SCREEN.blit(cielo, (0,0))
@@ -60,8 +44,6 @@ def inizializza():
     moneta=[]
     moneta.append(monetine())
     
-tom=rect
-nuvola=rect
 
 def aggiorna():
     pygame.display.update()
@@ -105,9 +87,9 @@ while True:
     if moneta[-1].x < 150:
         moneta.append(monetine())
     
-    for nuvola in nuvole:
-        if nuvola.rect.collide_rect(tom.get_rect()):
-            gameover()
+    # for nuvola in nuvole:
+    #     if nuvola.rect.collide_rect(tom.get_rect()):
+    #         gameover()
 
     if tom_y<-20 or tom_y>370:
         gameover()
