@@ -48,9 +48,6 @@ def inizializza():
     moneta=[]
     moneta.append(monetine())
     
-# tom=rect
-# nuvola=rect
-
 def aggiorna():
     pygame.display.update()
     pygame.time.Clock().tick(FPS)
@@ -95,9 +92,9 @@ while True:
             moneta.append(monetine())
 
     
-    # for nuvola in nuvole:
-    #     if nuvola.rect.collide_rect(tom.get_rect()):
-    #         gameover()
+    for nuvola in nuvole:
+        if nuvola.rect.colliderect(pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))):
+            gameover()
 
     if tom_y<-20 or tom_y>370:
         gameover()

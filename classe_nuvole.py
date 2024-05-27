@@ -12,7 +12,7 @@ class nuvolette:
         self.x=600
         self.y=randint(100,400)
         self.image=nuvoletta
-        self.rect=self.image.get_rect(center=(self.x, self.y))
+        self.rect=pygame.transform.rotozoom(self.image, 0, 0.8).get_rect(center=(self.x, self.y))
     def movimento(self):
         self.rect.x-=vel
         SCREEN.blit(self.image, self.rect)
