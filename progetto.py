@@ -31,7 +31,7 @@ def immagini():
         nuvola.movimento()
     for coin in moneta:
         coin.movimento()
-    SCREEN.blit(cornice2, (cornicegiu_x, 245))
+    SCREEN.blit(cornice2, (cornicegiu_x, 437))
     SCREEN.blit(cornicesu, (cornicesu_x, 0))
     SCREEN.blit(tom, (tom_x, tom_y))
 
@@ -41,7 +41,7 @@ def inizializza():
     global nuvole, moneta
     cornicegiu_x=0
     cornicesu_x=-2
-    tom_x, tom_y= -100, 150
+    tom_x, tom_y= 50, 150
     fast_tom=0
     nuvole=[]
     nuvole.append(nuvolette())
@@ -93,10 +93,13 @@ while True:
 
     
     for nuvola in nuvole:
-        if nuvola.rect.colliderect(pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))):
+        tom_rect=pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))
+        if nuvola.rect.colliderect(tom_rect):
             gameover()
+        if nuvola.rect.right<0:
+            nuvole.remove(nuvola)
 
-    if tom_y<-20 or tom_y>370:
+    if tom_y<20 or tom_y>440:
         gameover()
 
     immagini()
