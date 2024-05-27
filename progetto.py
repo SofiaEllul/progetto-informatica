@@ -3,6 +3,7 @@ from random import randint
 from pygame.locals import *
 from classe_nuvole import nuvolette
 from classe_moneta import monetine
+from classe_punti import Punteggio
 rect=pygame.rect
 
 pygame.init()
@@ -35,10 +36,13 @@ def immagini():
     SCREEN.blit(cornicesu, (cornicesu_x, 0))
     SCREEN.blit(tom, (tom_x, tom_y))
 
+punti_y = 60
+punti = Punteggio(SCREEN, [0,0], [605, punti_y])
+
 def inizializza():
     global tom_x, tom_y, fast_tom
     global cornicesu_x, cornicegiu_x
-    global nuvole, moneta
+    global nuvole, moneta, punti
     cornicegiu_x=0
     cornicesu_x=-2
     tom_x, tom_y= 50, 150

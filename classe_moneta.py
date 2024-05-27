@@ -11,7 +11,7 @@ SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 class monetine:
     def __init__(self):
         self.x=600
-        self.y=randint(50,450)
+        self.y=randint(60,430)
         self.image=monetina
         self.rect=self.image.get_rect(center=(self.x, self.y))
     def movimento(self):
