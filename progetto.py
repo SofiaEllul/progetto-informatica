@@ -30,14 +30,14 @@ pygame.display.set_caption("Talking Tom!")
 def schermata_iniziale():
     intro=True
     while intro:
+        SCREEN.blit(home, (0,0))
+        SCREEN.blit(icona, (190, 225))
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
         if event.type==KEYDOWN:
-            if event.key==K_SPACE:
+            if event.key==MOUSEBUTTONDOWN:
                 intro=False
-        SCREEN.blit(home, (0,0))
-        SCREEN.blit(icona, (190, 300))
         pygame.display.update()
         Clock.tick(FPS)
 
