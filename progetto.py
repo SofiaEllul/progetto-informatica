@@ -21,10 +21,26 @@ FPS=50
 vel=12
 vel_nuvole=12
 
-
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
+
+def schermata_iniziale():
+    for event in pygame.event.get():
+        if event.type==QUIT:
+            pygame.quit()
+    if event.type==KEYDOWN:
+        if event.type==K_SPACE:
+            intro=False
+
+    intro=True
+    while intro:
+        SCREEN.fill()
+        SCREEN.blit()
+        pygame.display.update()
+        Clock.tick(FPS)
+
+schermata_iniziale()
 
 def immagini():
     SCREEN.blit(cielo, (0,0))
