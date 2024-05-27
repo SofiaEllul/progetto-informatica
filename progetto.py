@@ -16,6 +16,8 @@ nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom .png")
 game_over=pygame.image.load("immagini/gameover.png")
 monetina=pygame.image.load('immagini/monetina.png')
+home=pygame.image.load('immagini/menu.png')
+icona=pygame.image.load('immagini/FAST_TOM.png')
 
 FPS=50
 vel=12
@@ -26,17 +28,16 @@ SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
 def schermata_iniziale():
-    for event in pygame.event.get():
-        if event.type==QUIT:
-            pygame.quit()
-    if event.type==KEYDOWN:
-        if event.type==K_SPACE:
-            intro=False
-
     intro=True
     while intro:
-        SCREEN.fill()
-        SCREEN.blit()
+        for event in pygame.event.get():
+            if event.type==QUIT:
+                pygame.quit()
+        if event.type==KEYDOWN:
+            if event.key==K_SPACE:
+                intro=False
+        SCREEN.blit(home, (0,0))
+        SCREEN.blit(icona, (190, 300))
         pygame.display.update()
         Clock.tick(FPS)
 
@@ -59,6 +60,7 @@ def inizializza():
     global tom_x, tom_y, fast_tom
     global cornicesu_x, cornicegiu_x
     global nuvole, moneta, punti
+    global home, icona
     cornicegiu_x=0
     cornicesu_x=-2
     tom_x, tom_y= 50, 150
