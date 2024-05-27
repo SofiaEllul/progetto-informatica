@@ -11,19 +11,28 @@ cornicesu= pygame.transform.flip(cornice2, False, True)
 nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom .png")
 game_over=pygame.image.load("immagini/gameover.png")
+monetina=pygame.image.load('immagini/monetina.png')
 
 FPS=50
-vel=5
-vel_nuvole=3
+vel=12
+vel_nuvole=12
 
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
+class monetine:
+    def __init__(self):
+        self.x=600
+        self.y=randint(-10,150)
+    def movimento(self):
+        self.x-=vel
+        SCREEN.blit(monetina, (self.x,self.y+100))
+
 class nuvolette:
     def __init__(self):
-        self.x=700
-        self.y=randint(-75,200)
+        self.x=600
+        self.y=randint(-20,150)
     def movimento(self):
         self.x-=vel
         SCREEN.blit(nuvoletta, (self.x,self.y+100))
@@ -39,20 +48,22 @@ def immagini():
 def inizializza():
     global tom_x, tom_y, fast_tom
     global cornicesu_x, cornicegiu_x
-    global nuvole
+    global nuvole, moneta
     cornicegiu_x=0
     cornicesu_x=-2
     tom_x, tom_y= -100, 150
     fast_tom=0
     nuvole=[]
     nuvole.append(nuvolette())
+    moneta=[]
+    moneta.append(monetine())
 
 def aggiorna():
     pygame.display.update()
     pygame.time.Clock().tick(FPS)
 
 def gameover():
-    SCREEN.blit(game_over, (192,60))
+    SCREEN.blit(game_over, (190,118))
     aggiorna()
     ricomincia=False
     while not ricomincia:
@@ -66,13 +77,13 @@ def gameover():
 inizializza()
 
 while True:
-    # cornicegiu_x-=vel
-    # if cornicegiu_x<-300:
-    #     cornicegiu_x=0
+    cornicegiu_x-=vel
+    if cornicegiu_x<-300:
+        cornicegiu_x=0
 
-    # cornicesu_x-=vel
-    # if cornicesu_x<-300:
-    #     cornicesu_x=0
+    cornicesu_x-=vel
+    if cornicesu_x<-300:
+        cornicesu_x=0
 
     fast_tom+=1
     tom_y+=fast_tom
@@ -85,6 +96,12 @@ while True:
     
     if nuvole[-1].x < 150:
         nuvole.append(nuvolette())
+
+    if moneta[-1].x < 150:
+        moneta.append(monetine())
+    
+    if tom_x==nuvole[0]:
+        gameover()
 
     if tom_y<-20 or tom_y>370:
         gameover()
