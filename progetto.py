@@ -1,6 +1,7 @@
 import pygame, sys
 from random import randint
 from pygame.locals import *
+rect=pygame.rect
 
 pygame.init()
 Clock= pygame.time.Clock()
@@ -17,13 +18,14 @@ FPS=50
 vel=12
 vel_nuvole=12
 
+
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
 class monetine:
     def __init__(self):
-        self.x=600
+        self.x=400
         self.y=randint(-10,150)
     def movimento(self):
         self.x-=vel
@@ -57,6 +59,9 @@ def inizializza():
     nuvole.append(nuvolette())
     moneta=[]
     moneta.append(monetine())
+    
+tom=rect
+nuvola=rect
 
 def aggiorna():
     pygame.display.update()
@@ -100,8 +105,9 @@ while True:
     if moneta[-1].x < 150:
         moneta.append(monetine())
     
-    if tom_x==nuvole[0]:
-        gameover()
+    for nuvola in nuvole:
+        if nuvola.rect.collide_rect(tom.get_rect()):
+            gameover()
 
     if tom_y<-20 or tom_y>370:
         gameover()
