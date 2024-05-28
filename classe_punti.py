@@ -16,5 +16,5 @@ class Punteggio:
 
         font = pygame.font.Font(None, 65)
         text = font.render(str(self.punti), 1, Colore)
-        self.screen.blit(text, (250, 10))
+        self.screen.blit(text, (40, 40))
         

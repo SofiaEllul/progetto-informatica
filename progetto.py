@@ -16,8 +16,15 @@ nuvoletta= pygame.image.load("immagini/nuvoletta.png")
 tom= pygame.image.load("immagini/tom .png")
 game_over=pygame.image.load("immagini/gameover.png")
 monetina=pygame.image.load('immagini/monetina.png')
+
 home=pygame.image.load('immagini/menu.png')
 icona=pygame.image.load('immagini/FAST_TOM.png')
+
+bottone=pygame.image.load('immagini/FAST_TOM.png')
+menu=pygame.image.load('immagini/menu.png')
+
+bottone_rect=bottone.get_rect()
+# (lavorando sul punteggio)
 
 FPS=50
 vel=12
@@ -26,6 +33,7 @@ vel_nuvole=12
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
+
 
 def schermata_iniziale():
     intro=True
@@ -42,6 +50,24 @@ def schermata_iniziale():
         Clock.tick(FPS)
 
 schermata_iniziale()
+
+# def schermata_iniziale():
+#     for event in pygame.event.get():
+#         if event.type==QUIT:
+#             pygame.quit()
+#             sys.exit()
+#         intro=True
+#         if event.type==KEYDOWN:
+#             if event.type==K_SPACE:
+#                 intro=False
+
+#         while intro:
+#             SCREEN.fill()
+#             SCREEN.blit(menu, (0,0))
+#             pygame.display.update()
+#             Clock.tick(FPS)
+#         inizializza()
+# (lavorando sul punteggio)
 
 def immagini():
     SCREEN.blit(cielo, (0,0))
@@ -86,7 +112,10 @@ def gameover():
             if event.type==pygame.QUIT:
                 pygame.quit()
 
+
 inizializza()
+
+punti=Punteggio(SCREEN, (10,10), (30, 50))
 
 while True:
     cornicegiu_x-=vel
@@ -105,7 +134,7 @@ while True:
             fast_tom=-10
         if event.type==QUIT:
             pygame.quit()
-    
+
     if nuvole[-1].rect.x < 150:
         nuvole.append(nuvolette())
         moneta.append(monetine())
@@ -120,9 +149,16 @@ while True:
             gameover()
         if nuvola.rect.right<0:
             nuvole.remove(nuvola)
+    immagini()
+    
+    for i in range(len(moneta)):
+        if tom_rect.colliderect(moneta[i].rect):
+            print('x')
+            punti.punti+=1
+    punti.disegna()
 
     if tom_y<20 or tom_y>440:
         gameover()
 
-    immagini()
+    # schermata_iniziale()
     aggiorna()
