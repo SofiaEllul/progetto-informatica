@@ -20,10 +20,6 @@ monetina=pygame.image.load('immagini/monetina.png')
 home=pygame.image.load('immagini/menu.png')
 icona=pygame.image.load('immagini/FAST_TOM.png')
 
-bottone=pygame.image.load('immagini/FAST_TOM.png')
-menu=pygame.image.load('immagini/menu.png')
-
-bottone_rect=bottone.get_rect()
 # (lavorando sul punteggio)
 
 FPS=50
@@ -39,7 +35,7 @@ def schermata_iniziale():
     intro=True
     while intro:
         SCREEN.blit(home, (0,0))
-        SCREEN.blit(icona, (190, 225))
+        SCREEN.blit(icona, (155, 240))
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
