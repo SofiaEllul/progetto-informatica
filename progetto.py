@@ -31,20 +31,7 @@ SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
 
-def schermata_iniziale():  
-    SCREEN.blit(home, (0,0))
-    SCREEN.blit(icona, (155, 240))
-    icona_rect=icona.get_rect()
-    aggiorna()
-    while True:
-        for event in pygame.event.get():
-            if event.type==QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type==MOUSEBUTTONDOWN:
-                pos=pygame.mouse.get_pos()
-                if icona_rect.collidepoint(pos):
-                    inizializza()
+
                     
 
                 
@@ -97,52 +84,67 @@ inizializza()
 
 punti=Punteggio(SCREEN, (10,10), (30, 50))
 
-while True:
-    
-    schermata_iniziale()    
 
-    cornicegiu_x-=vel
-    if cornicegiu_x<-300:
-        cornicegiu_x=0
+def inizio_gioco():
+    while True: 
 
-    cornicesu_x-=vel
-    if cornicesu_x<-300:
-        cornicesu_x=0
+        cornicegiu_x-=vel
+        if cornicegiu_x<-300:
+            cornicegiu_x=0
 
-    fast_tom+=1
-    tom_y+=fast_tom
-    
+        cornicesu_x-=vel
+        if cornicesu_x<-300:
+            cornicesu_x=0
+
+        fast_tom+=1
+        tom_y+=fast_tom
+        
+        for event in pygame.event.get():
+            if event.type==KEYDOWN and event.key==K_UP:
+                fast_tom=-10
+            if event.type==QUIT:
+                pygame.quit()
+                
+
+        if nuvole[-1].rect.x < 150:
+            nuvole.append(nuvolette())
+            moneta.append(monetine())
+            while moneta[-1].rect.top<nuvole[-1].rect.bottom and moneta[-1].rect.top>nuvole[-1].rect.top:
+                moneta.pop()
+                moneta.append(monetine())
+
+        
+        for nuvola in nuvole:
+            tom_rect=pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))
+            if nuvola.rect.colliderect(tom_rect):
+                gameover()
+            if nuvola.rect.right<0:
+                nuvole.remove(nuvola)
+        immagini()
+        
+        for i in range(len(moneta)):
+            if tom_rect.colliderect(moneta[i].rect):
+                print('x')
+                punti.punti+=1
+        punti.disegna()
+
+        if tom_y<20 or tom_y>440:
+            gameover()
+
+        
+        aggiorna()
+
+
+def schermata_iniziale():  
+    SCREEN.blit(home, (0,0))
+    SCREEN.blit(icona, (155, 240))
+    icona_rect=icona.get_rect()
+    aggiorna()
     for event in pygame.event.get():
-        if event.type==KEYDOWN and event.key==K_UP:
-            fast_tom=-10
         if event.type==QUIT:
             pygame.quit()
-            
-
-    if nuvole[-1].rect.x < 150:
-        nuvole.append(nuvolette())
-        moneta.append(monetine())
-        while moneta[-1].rect.top<nuvole[-1].rect.bottom and moneta[-1].rect.top>nuvole[-1].rect.top:
-            moneta.pop()
-            moneta.append(monetine())
-
-    
-    for nuvola in nuvole:
-        tom_rect=pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))
-        if nuvola.rect.colliderect(tom_rect):
-            gameover()
-        if nuvola.rect.right<0:
-            nuvole.remove(nuvola)
-    immagini()
-    
-    for i in range(len(moneta)):
-        if tom_rect.colliderect(moneta[i].rect):
-            print('x')
-            punti.punti+=1
-    punti.disegna()
-
-    if tom_y<20 or tom_y>440:
-        gameover()
-
-    
-    aggiorna()
+            sys.exit()
+        if event.type==MOUSEBUTTONDOWN:
+            pos=pygame.mouse.get_pos()
+            if icona_rect.collidepoint(pos):
+                inizio_gioco()
