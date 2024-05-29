@@ -31,39 +31,23 @@ SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Talking Tom!")
 
 
-def schermata_iniziale():
-    intro=True
-    while intro:
-        SCREEN.blit(home, (0,0))
-        SCREEN.blit(icona, (155, 240))
+def schermata_iniziale():  
+    SCREEN.blit(home, (0,0))
+    SCREEN.blit(icona, (155, 240))
+    icona_rect=icona.get_rect()
+    aggiorna()
+    while True:
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
-        if event.type==KEYDOWN:
-            if event.key==MOUSEBUTTONDOWN:
-                intro=False
-        pygame.display.update()
-        Clock.tick(FPS)
+                sys.exit()
+            if event.type==MOUSEBUTTONDOWN:
+                pos=pygame.mouse.get_pos()
+                if icona_rect.collidepoint(pos):
+                    inizializza()
+                    
 
-schermata_iniziale()
-
-# def schermata_iniziale():
-#     for event in pygame.event.get():
-#         if event.type==QUIT:
-#             pygame.quit()
-#             sys.exit()
-#         intro=True
-#         if event.type==KEYDOWN:
-#             if event.type==K_SPACE:
-#                 intro=False
-
-#         while intro:
-#             SCREEN.fill()
-#             SCREEN.blit(menu, (0,0))
-#             pygame.display.update()
-#             Clock.tick(FPS)
-#         inizializza()
-# (lavorando sul punteggio)
+                
 
 def immagini():
     SCREEN.blit(cielo, (0,0))
@@ -114,6 +98,9 @@ inizializza()
 punti=Punteggio(SCREEN, (10,10), (30, 50))
 
 while True:
+    
+    schermata_iniziale()    
+
     cornicegiu_x-=vel
     if cornicegiu_x<-300:
         cornicegiu_x=0
@@ -124,12 +111,13 @@ while True:
 
     fast_tom+=1
     tom_y+=fast_tom
-
+    
     for event in pygame.event.get():
         if event.type==KEYDOWN and event.key==K_UP:
             fast_tom=-10
         if event.type==QUIT:
             pygame.quit()
+            
 
     if nuvole[-1].rect.x < 150:
         nuvole.append(nuvolette())
@@ -156,5 +144,5 @@ while True:
     if tom_y<20 or tom_y>440:
         gameover()
 
-    # schermata_iniziale()
+    
     aggiorna()
