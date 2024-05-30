@@ -71,6 +71,7 @@ def gameover():
             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
                 inizializza()
                 ricomincia=True
+                punti.punti=0
             if event.type==pygame.QUIT:
                 pygame.quit()
         aggiorna()
@@ -130,9 +131,15 @@ while True:
             tom_rect=pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))
             if nuvola.rect.colliderect(tom_rect):
                 gameover()
+
             if nuvola.rect.right<0:
                 nuvole.remove(nuvola)
         immagini()
+        
+        for i in  range(len(moneta)):
+            if moneta[i].rect==nuvola.rect:
+                moneta.remove(moneta[i])
+
         
         for coin in moneta:
             if tom_rect.colliderect(coin.rect):
@@ -143,5 +150,8 @@ while True:
 
         if tom_y<20 or tom_y>440:
             gameover()
+
+        
+     
 
     aggiorna()
