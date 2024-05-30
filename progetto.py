@@ -28,15 +28,10 @@ vel_nuvole=12
 
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
-pygame.display.set_caption("Talking Tom!")
-
-
-
-                    
-
-                
+pygame.display.set_caption("Talking Tom!")     
 
 def immagini():
+    global cielo, nuvole, moneta, cornice2, cornicegiu_x, cornicesu, cornicesu_x, tom, tom_x, tom_y
     SCREEN.blit(cielo, (0,0))
     for nuvola in nuvole:
         nuvola.movimento()
@@ -78,16 +73,34 @@ def gameover():
                 ricomincia=True
             if event.type==pygame.QUIT:
                 pygame.quit()
-
+        aggiorna()
 
 inizializza()
 
 punti=Punteggio(SCREEN, (10,10), (30, 50))
 
+inizio=True
 
-def inizio_gioco():
-    while True: 
+while True: 
 
+    if inizio:
+        SCREEN.blit(home, (0,0))
+        SCREEN.blit(icona, (155, 240))
+        icona_rect=icona.get_rect(topleft=(155, 240))
+        aggiorna()
+        for event in pygame.event.get():
+            if event.type==QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type==MOUSEBUTTONDOWN:
+                pos=pygame.mouse.get_pos()
+                if icona_rect.collidepoint(pos):
+                    print('x')
+                    inizio=False
+                    
+    else:
+
+        immagini()
         cornicegiu_x-=vel
         if cornicegiu_x<-300:
             cornicegiu_x=0
@@ -112,7 +125,6 @@ def inizio_gioco():
             while moneta[-1].rect.top<nuvole[-1].rect.bottom and moneta[-1].rect.top>nuvole[-1].rect.top:
                 moneta.pop()
                 moneta.append(monetine())
-
         
         for nuvola in nuvole:
             tom_rect=pygame.transform.rotozoom(tom, 0, 0.8).get_rect(topleft=(tom_x, tom_y))
@@ -131,20 +143,4 @@ def inizio_gioco():
         if tom_y<20 or tom_y>440:
             gameover()
 
-        
-        aggiorna()
-
-
-def schermata_iniziale():  
-    SCREEN.blit(home, (0,0))
-    SCREEN.blit(icona, (155, 240))
-    icona_rect=icona.get_rect()
     aggiorna()
-    for event in pygame.event.get():
-        if event.type==QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type==MOUSEBUTTONDOWN:
-            pos=pygame.mouse.get_pos()
-            if icona_rect.collidepoint(pos):
-                inizio_gioco()
