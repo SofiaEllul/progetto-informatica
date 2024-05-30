@@ -136,11 +136,12 @@ while True:
                 nuvole.remove(nuvola)
         immagini()
         
-        for i in  range(len(moneta)):
-            if moneta[i].rect==nuvola.rect:
-                moneta.remove(moneta[i])
-
         
+        for nuvola in nuvole:
+            for coin in moneta:
+                if nuvola.rect.colliderect(coin.rect):
+                    moneta.remove(coin)
+
         for coin in moneta:
             if tom_rect.colliderect(coin.rect):
                 print('x')

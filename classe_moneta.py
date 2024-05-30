@@ -1,12 +1,16 @@
 from random import randint
 import pygame
 
+from classe_nuvole import nuvolette
+
 monetina=pygame.image.load('immagini/monetina.png')
 vel=6
 
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
 
+nuvole=[]
+nuvole.append(nuvolette())
 
 class monetine:
     def __init__(self):
@@ -17,4 +21,5 @@ class monetine:
     def movimento(self):
         self.rect.x-=vel
         SCREEN.blit(self.image, self.rect)
+
 
