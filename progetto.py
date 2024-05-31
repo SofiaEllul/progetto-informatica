@@ -18,7 +18,8 @@ game_over=pygame.image.load("immagini/gameover.png")
 monetina=pygame.image.load('immagini/monetina.png')
 
 home=pygame.image.load('immagini/menu.png')
-icona=pygame.image.load('immagini/FAST_TOM.png')
+icona=pygame.image.load('immagini/play.png')
+icona_tom=pygame.image.load("immagini/FAST_TOM.png")
 
 # (lavorando sul punteggio)
 
@@ -72,6 +73,7 @@ def gameover():
                 inizializza()
                 ricomincia=True
                 punti.punti=0
+                
             if event.type==pygame.QUIT:
                 pygame.quit()
         aggiorna()
@@ -86,8 +88,9 @@ while True:
 
     if inizio:
         SCREEN.blit(home, (0,0))
-        SCREEN.blit(icona, (155, 240))
-        icona_rect=icona.get_rect(topleft=(155, 240))
+        SCREEN.blit(icona, (125, 370))
+        SCREEN.blit(icona_tom, (190, 220))
+        icona_rect=icona.get_rect(topleft=(125, 370))
         aggiorna()
         for event in pygame.event.get():
             if event.type==QUIT:
@@ -115,7 +118,7 @@ while True:
         
         for event in pygame.event.get():
             if event.type==KEYDOWN and event.key==K_UP:
-                fast_tom=-10
+                fast_tom=-11
             if event.type==QUIT:
                 pygame.quit()
                 
