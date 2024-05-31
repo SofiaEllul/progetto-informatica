@@ -23,9 +23,9 @@ icona_tom=pygame.image.load("immagini/FAST_TOM.png")
 
 # (lavorando sul punteggio)
 
-FPS=50
-vel=12
-vel_nuvole=12
+FPS=60
+vel=10
+vel_nuvole=10
 
 WINDOW_SIZE= (605,500)
 SCREEN= pygame.display.set_mode(WINDOW_SIZE)
@@ -73,7 +73,7 @@ def gameover():
                 inizializza()
                 ricomincia=True
                 punti.punti=0
-                
+
             if event.type==pygame.QUIT:
                 pygame.quit()
         aggiorna()
